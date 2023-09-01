@@ -12,6 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using VRage.Game.Localization;
 using VRage.Utils;
 using VRageMath;
 
@@ -162,11 +163,11 @@ namespace SE_ResizableChat
                 MyHudControlChat chat = MyHud.Chat.ChatControl;
 
                 m_textScaleSetter.Invoke(chat, Config.Static.TextScale);
-                m_textScaleWithLanguageSetter.Invoke(chat, Config.Static.TextScale * MyGuiManager.LanguageTextScale);
+                m_textScaleWithLanguageSetter.Invoke(chat, Config.Static.TextScale * MyLanguage.Instance?.LanguageTextScale ?? 1f);
 
                 chat.Size = new Vector2(Config.Static.ChatWidth, Config.Static.ChatHeight);
 
-                RecalculateLineHeight(chat, Config.Static.TextScale * MyGuiManager.LanguageTextScale);
+                RecalculateLineHeight(chat, Config.Static.TextScale * MyLanguage.Instance?.LanguageTextScale ?? 1f);
                 chat.RefreshText(false);
 
                 chat.Visibility = MyHudControlChat.MyChatVisibilityEnum.AlwaysVisible;
